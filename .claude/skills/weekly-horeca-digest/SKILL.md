@@ -45,6 +45,13 @@ intr-un digest anterior nu mai apare niciodata, nici de pe alta sursa.
      rapoartele anterioare. La feed-urile `(filtrat)` trec doar titlurile cu
      cuvinte-cheie HoReCa/food, deci lista e o preselectie — tot tu decizi relevanta.
 
+   **Daca scriptul iese cu codul 3 (toate feed-urile blocate de retea), opreste-te.**
+   Nu scrie raport, nu rula `--mark`, nu face commit sau push: un raport gol ar fi
+   trimis pe email si ar muta inceputul ferestrei urmatoare, pierzand stirile
+   saptamanii. Incheie cu un mesaj clar ca mediul cloud nu are acces la internet si
+   ca setarea de retea a mediului trebuie schimbata. La fel procedeaza daca, dupa
+   pasii 3–5, nu ai putut confirma nicio stire din cauza blocajelor de retea.
+
 2. **Evita repetarile.** Citeste ultimele ~150 de randuri din
    `rapoarte/linkuri-procesate.txt` (titlurile publicate recent). Elimina orice stire
    care descrie **acelasi eveniment** ca una deja publicata, chiar daca vine de pe

@@ -231,6 +231,11 @@ def cmd_collect(args):
     print("|---|---|---|---|---|")
     for r in status_rows:
         print(f"| {r[0]} | {r[1]} | {r[2]} | {r[3]} | {r[4]} |")
+    with_feed = [r for r in status_rows if r[1] != "fara feed"]
+    if with_feed and all(r[1].startswith("blocat") for r in with_feed):
+        print("\n!! TOATE feed-urile sunt blocate de reteaua mediului. NU scrie si NU publica"
+              " niciun raport; opreste-te si raporteaza problema (vezi SKILL.md, pasul 1).")
+        sys.exit(3)
     print("\n## Articole din feed-uri (in fereastra, nepublicate inca)\n")
     for src, items in sections:
         print(f"### {src['name']}")
