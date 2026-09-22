@@ -25,7 +25,9 @@ scopul e strict industria HoReCa/food, nu retail-ul in ansamblu.
 
 2. **Pentru fiecare sursa**, acceseaza pagina principala sau sectiunea relevanta
    (HoReCa / food / economic local) si identifica articolele publicate in
-   ultimele 7 zile (de luni trecuta pana azi).
+   ultimele 7 zile (de luni trecuta pana azi). Daca sursa are sub ea una sau mai
+   multe linii `Pagină HoReCa/food:`, porneste de la acele pagini; foloseste
+   homepage-ul doar daca ele nu raspund sau nu au nimic din ultimele 7 zile.
 
 3. **Filtreaza** doar articolele relevante pentru HoReCa sau food (restaurante,
    cafenele, catering, food delivery, productie/distributie alimentara,
