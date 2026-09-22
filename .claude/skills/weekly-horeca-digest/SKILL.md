@@ -172,7 +172,21 @@ intr-un digest anterior nu mai apare niciodata, nici de pe alta sursa.
    scriptul il citeste de acolo in pasul urmator. Nu pune alte linkuri in
    sectiunea `Toate stirile`.
 
-11. **Inregistreaza stirile publicate**:
+11. **Treci textul final prin humanizer.** Invoca skill-ul `humanizer` (din
+    `.claude/skills/humanizer/`) in modul fisier pe `rapoarte/digest-YYYY-MM-DD.md`
+    si scrie inapoi in fisier doar varianta finala. Reguli pentru raportul asta:
+    - Rescrie doar textul: randurile din `Pe scurt`, rezumatele si ce urmeaza dupa
+      `Oportunitate:`.
+    - Nu atinge structura: titlul raportului, randul `Perioada acoperita`, titlurile
+      de sectiune, titlurile de stiri `### [Scor]/10 — [Titlu]` (inclusiv liniuta
+      lunga dintre scor si titlu, pe care o citeste scriptul), etichetele `Sursa:` si
+      `Oportunitate:` si randurile cu linkuri. Liniutele lungi scoase de humanizer sunt
+      doar cele din text.
+    - Pastreaza fiecare fapt: nume, adrese, date, cifre, persoane de contact. Nu adauga
+      nimic ce nu era in raport.
+    - Textul ramane fara diacritice.
+
+12. **Inregistreaza stirile publicate**:
 
     ```
     python .claude/skills/weekly-horeca-digest/scripts/colecteaza.py --mark rapoarte/digest-YYYY-MM-DD.md
