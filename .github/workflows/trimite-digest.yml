@@ -1,0 +1,57 @@
+name: Trimite digestul pe email
+
+# Ruleaza cand routine-ul face push cu un raport nou in rapoarte/,
+# sau manual din tab-ul Actions (optional cu un raport anume).
+on:
+  push:
+    branches: [main]
+    paths: ["rapoarte/digest-*.md"]
+  workflow_dispatch:
+    inputs:
+      raport:
+        description: "Raportul de trimis (ex. rapoarte/digest-2026-09-28.md). Gol = cel mai recent."
+        required: false
+
+jobs:
+  trimite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Alege raportul
+        id: raport
+        env:
+          INPUT_RAPORT: ${{ github.event.inputs.raport }}
+        run: |
+          if [ -n "$INPUT_RAPORT" ]; then
+            f="$INPUT_RAPORT"
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            f=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- 'rapoarte/digest-*.md' | sort | tail -1)
+          else
+            f=$(ls rapoarte/digest-*.md | sort | tail -1)
+          fi
+          if [ -z "$f" ] || [ ! -f "$f" ]; then
+            echo "Niciun raport nou de trimis."; echo "file=" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          d=$(basename "$f" .md | sed 's/^digest-//')
+          echo "file=$f" >> "$GITHUB_OUTPUT"
+          echo "date=$d" >> "$GITHUB_OUTPUT"
+
+      - name: Trimite emailul
+        if: steps.raport.outputs.file != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: Digest HoReCa <${{ secrets.MAIL_USERNAME }}>
+          # destinatarii primesc in BCC, ca sa nu-si vada adresele intre ei
+          to: ${{ secrets.MAIL_USERNAME }}
+          bcc: ${{ secrets.MAIL_TO }}
+          subject: Digest HoReCa & Food — ${{ steps.raport.outputs.date }}
+          html_body: file://${{ steps.raport.outputs.file }}
+          convert_markdown: true
