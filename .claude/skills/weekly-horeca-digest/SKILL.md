@@ -67,7 +67,11 @@ intr-un digest anterior nu mai apare niciodata, nici de pe alta sursa.
 
    Pentru rezumat si randul `Oportunitate`, deschide articolul. Daca site-ul
    refuza cererea din cloud, foloseste descrierea din `colectare/colectare.md`
-   si scrie doar ce reiese sigur din ea.
+   si scrie doar ce reiese sigur din ea. Articolele venite prin Google News
+   (linkuri `news.google.com/...`, la Wall-Street si BZI) au doar titlu si data:
+   daca nu poti deschide articolul, scrie rezumatul si randul `Oportunitate` doar
+   din titlu, fara sa completezi detalii care nu apar acolo. Pastreaza linkul
+   Google News in raport — duce la articolul original.
 
    **Daca scriptul iese cu codul 3 (toate feed-urile blocate de retea), opreste-te.**
    Nu scrie raport, nu rula `--mark`, nu face commit sau push: un raport gol ar fi

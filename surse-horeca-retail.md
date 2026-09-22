@@ -13,6 +13,10 @@ Format:
   - Pagină HoReCa/food: URL     ← secțiune/tag dedicat, citit direct din pagină
 ```
 
+Pentru site-urile care refuză cererile venite din servere (Wall-Street, BZI), feed-ul
+e o căutare Google News limitată la acel site și la cuvinte HoReCa. Linkurile din el
+trec prin news.google.com și duc la articolul original.
+
 Ordinea de lucru a skill-ului: întâi feed-urile (au data exactă a publicării), apoi
 paginile HoReCa/food, iar homepage-ul doar ca rezervă. Rândurile `Feed` și `Pagină`
 sunt opționale — o sursă nouă poate avea doar linia principală.
@@ -40,6 +44,7 @@ legate de HoReCa/food, nu orice altă știre de business.
 - [Profit.ro](https://www.profit.ro) — business — național
   - Feed (filtrat): https://www.profit.ro/rss
 - [Wall-Street.ro](https://www.wall-street.ro) — business — național
+  - Feed (filtrat): https://news.google.com/rss/search?q=site%3Awall-street.ro%20%28restaurant%20OR%20restaurante%20OR%20cafenea%20OR%20cafenele%20OR%20horeca%20OR%20bistro%20OR%20%22street%20food%22%20OR%20festival%20OR%20%22fast%20food%22%20OR%20livrare%20OR%20gastronomic%29%20when%3A14d&hl=ro&gl=RO&ceid=RO:ro
   - Pagină HoReCa/food: https://www.wall-street.ro/articol/horeca/index.html
   - Pagină HoReCa/food: https://www.wall-street.ro/tag/restaurante.html
 - [Economica.net](https://www.economica.net) — business — național
@@ -59,6 +64,7 @@ Sunt surse generaliste locale — skill-ul filtrează din ele doar știrile HoRe
   - Feed (filtrat): https://actualdecluj.ro/feed/
 - [BZI.ro](https://www.bzi.ro) — general/economic local — Iași
   - Feed (filtrat): https://www.bzi.ro/rss
+  - Feed (filtrat): https://news.google.com/rss/search?q=site%3Abzi.ro%20%28restaurant%20OR%20restaurante%20OR%20cafenea%20OR%20cafenele%20OR%20horeca%20OR%20bistro%20OR%20%22street%20food%22%20OR%20festival%20OR%20%22fast%20food%22%20OR%20livrare%20OR%20gastronomic%29%20when%3A14d&hl=ro&gl=RO&ceid=RO:ro
 - [Turnul Sfatului](https://www.turnulsfatului.ro) — general local — Sibiu
   - Feed (filtrat): https://www.turnulsfatului.ro/feed/
   - Pagină HoReCa/food: https://www.turnulsfatului.ro/timp-liber/cronica-de-restaurant/
