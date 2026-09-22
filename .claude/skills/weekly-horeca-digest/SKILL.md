@@ -7,15 +7,22 @@ description: Genereaza digestul saptamanal de stiri HoReCa si food din Romania, 
 
 ## Context
 
-Utilizatorul este Sales Executive la Glovo, in Bucuresti, si vrea sa fie la curent
-in fiecare saptamana cu miscarile importante din piata HoReCa si food din Romania
-(deschideri/inchideri de restaurante, cafenele si lanturi HoReCa, extinderi,
-parteneriate, schimbari legislative relevante — ex. TVA HoReCa —, miscari ale
-concurentei din food delivery, tendinte de consum alimentar).
+Utilizatorul este Sales Executive la Glovo, in Bucuresti. Treaba lui e sa semneze
+contracte cu restaurante partenere noi. Raportul nu e o revista a pietei, ci o
+**lista de oportunitati de vanzare**: fiecare stire trebuie sa raspunda la
+intrebarea „pot merge acolo, sau pot suna pe cineva, ca sa semnez un restaurant
+nou pe Glovo?”.
 
-Exclude explicit stirile de retail general (supermarketuri, hipermarketuri,
-FMCG, mall-uri, spatii comerciale) daca nu au legatura directa cu HoReCa sau food —
-scopul e strict industria HoReCa/food, nu retail-ul in ansamblu.
+Il intereseaza: restaurante, cafenele, fast-food-uri, dark kitchens care se
+deschid sau urmeaza sa se deschida, lanturi care intra in orase noi, food halls si
+food courts noi (multi chiriasi intr-un singur loc), festivaluri de street food si
+targuri gastronomice (multi operatori de mancare adunati intr-un loc), restaurante
+care parasesc alte platforme de livrare sau care nu livreaza inca.
+
+Nu il intereseaza informatia generala despre piata: statistici, cifre de afaceri
+agregate, studii, numiri de personal, premii, gale, cronici de restaurant, retailul
+general (supermarketuri, FMCG, mall-uri fara componenta food). Acestea nu intra in
+raport, chiar daca sunt stiri HoReCa corecte.
 
 **Regula de baza: fiecare stire apare intr-un singur raport.** Ce a fost publicat
 intr-un digest anterior nu mai apare niciodata, nici de pe alta sursa.
@@ -78,59 +85,74 @@ intr-un digest anterior nu mai apare niciodata, nici de pe alta sursa.
    Nu folosi servicii intermediare de citire a paginilor (r.jina.ai, cache-uri
    Google etc.).
 
-6. **Filtreaza** doar articolele relevante pentru HoReCa sau food (restaurante,
-   cafenele, catering, food delivery, productie/distributie alimentara pentru
-   HoReCa, tendinte de consum culinar). Ignora retailul general (supermarketuri,
-   FMCG, mall-uri), faptul divers (accidente, infractiuni, scandaluri fara impact
-   de business), politica si sportul, chiar daca titlul contine un cuvant-cheie.
+6. **Filtreaza pe oportunitati concrete.** Pastreaza doar stirile din care iese o
+   actiune de vanzare: un local anume, un operator anume sau un eveniment anume
+   unde se poate merge. Elimina tot ce e informatie generala (vezi Context), plus
+   faptul divers, politica si sportul, chiar daca titlul contine un cuvant-cheie.
 
-7. **Pentru fiecare stire retinuta**, scrie:
+7. **Scorul 1-10 = cat de repede si cat de sigur poate semna contracte noi
+   Sales Executive-ul pe baza stirii.** Grila:
+
+   | Scor | Ce fel de stire |
+   |---|---|
+   | 9-10 | Restaurant, cafenea, fast-food sau dark kitchen **nou deschis sau cu deschidere anuntata**, cu adresa sau zona cunoscuta, in Bucuresti. Food hall / food court nou in Bucuresti (multi chiriasi). Restaurant sau lant care **paraseste Wolt/Tazz/Bolt Food** sau spune ca nu livreaza inca. |
+   | 7-8 | Acelasi tip de deschidere in alt oras mare unde e Glovo (Cluj, Timisoara, Iasi, Brasov, Constanta, Sibiu, Craiova etc.). Lant care anunta un plan de extindere cu orase sau numar de unitati (ex. „5 restaurante noi in 2026”). Brand strain care intra in Romania. Festival de street food / targ gastronomic cu multi operatori, cu data si loc cunoscute, inca nedesfasurat. |
+   | 5-6 | Deschidere sau eveniment cu detalii incomplete (fara zona sau fara data). Lant existent care isi schimba conceptul sau lanseaza un brand nou. Relocari si redeschideri. Operator local care creste (investitie, locatie a doua). |
+   | 3-4 | Mentiune indirecta a unor operatori care ar putea fi prospectati (ex. lista restaurantelor participante la o saptamana gastronomica deja incheiata). |
+   | 1-2 | Nu intra in raport. |
+
+   Criterii de departajare la acelasi tip de stire: Bucuresti inaintea altor
+   orase; ceva care urmeaza (deschidere, festival) inaintea a ceva deja trecut;
+   operator independent sau lant mic (mai usor de semnat) inaintea unui gigant
+   care negociaza central (McDonald's, KFC). Un lant mare care deschide ramane
+   totusi o stire buna, dar max 7.
+
+   **Nu intra in raport stirile cu scor sub 3.** Daca intr-o saptamana raman putine
+   stiri, e in regula: mai bine 5 oportunitati reale decat 20 de stiri generale.
+
+8. **Pentru fiecare stire retinuta**, scrie:
    - Titlu (in romana; daca sursa e deja in romana pastreaza-l)
    - Sursa si data publicarii
-   - Un rezumat de 2-3 propozitii, in cuvinte proprii (nu copia paragrafe). Pentru
+   - Un rezumat de 1-2 propozitii, in cuvinte proprii (nu copia paragrafe). Pentru
      rezumat citeste articolul (feed-ul are de obicei si un fragment in
      `<description>`); daca articolul nu se poate deschide, rezuma doar ce e sigur.
-   - Un **scor de importanta 1-10**, din perspectiva unui Sales Executive Glovo care
-     vrea sa inteleaga miscarile din piata pe care le poate folosi in prospectare,
-     negociere sau pozitionare. Scoreaza mai sus:
-       - deschideri/extinderi de restaurante, cafenele sau lanturi HoReCa (potentiali parteneri noi)
-       - miscari ale concurentei din livrari: Wolt (care preia Tazz), Bolt Food,
-         alte platforme noi; restaurante care renunta la aplicatiile de livrare sau
-         isi fac livrare proprie; ghost kitchens
-       - schimbari legislative/fiscale care afecteaza marjele HoReCa (TVA, taxe)
-       - date agregate despre piata (cifra de afaceri HoReCa, numar de unitati, inchideri)
-     Scoreaza mai jos:
-       - stiri de opinie/interviu fara informatie noua
-       - evenimente/gale fara impact direct de business
-       - numiri de personal fara impact asupra strategiei companiei
+   - Un rand **Oportunitate:** cu ce se poate face concret, luat din articol:
+     numele localului sau al operatorului, adresa/zona, data deschiderii sau a
+     evenimentului, persoana sau firma mentionata (fondator, francizor,
+     organizator). Scrie doar ce apare in articol; daca lipseste, spune „adresa
+     nu e mentionata” in loc sa ghicesti.
 
-8. **Sorteaza** stirile descrescator dupa scor si scrie raportul in
+9. **Sorteaza** stirile descrescator dupa scor si scrie raportul in
    `rapoarte/digest-YYYY-MM-DD.md` (data rularii, ora Romaniei).
 
-9. **Structura raportului**:
+10. **Structura raportului**:
    ```
-   # Digest HoReCa & Food — [data]
+   # Oportunitati HoReCa — [data]
 
    Perioada acoperita: [inceput fereastra] – [data rularii]
 
-   ## Pe scurt (top 3)
-   [1-2 propozitii per stire, doar cele cu scor >= 8, daca exista]
+   ## Pe scurt
+   [cele mai bune 3 oportunitati (primele 3 din lista de mai jos), cate un rand:
+   ce, unde, cand. Daca sunt mai putin de 3 stiri, doar cate sunt.]
 
    ## Toate stirile (sortate dupa scor)
    ### [Scor]/10 — [Titlu]
    Sursa: [nume] — [data]
    [rezumat]
+   Oportunitate: [local/operator, adresa/zona, data, persoana de contact]
    [link]
 
    ## Starea surselor
    | Sursa | Stiri incluse | Stare |
-   [cate un rand pentru fiecare sursa: ok / fara stiri relevante saptamana asta /
-   blocat de reteaua mediului / eroare HTTP xxx / acoperita partial prin cautare]
+   [cate un rand pentru fiecare sursa: ok / fara oportunitati saptamana asta /
+   blocat de reteaua mediului / site-ul refuza cererile (HTTP xxx) /
+   acoperita partial prin cautare]
    ```
-   Linkul fiecarei stiri sta pe propriul rand, sub rezumat — scriptul il citeste
-   de acolo in pasul urmator. Nu pune alte linkuri in sectiunea `Toate stirile`.
+   Linkul fiecarei stiri sta pe propriul rand, sub randul `Oportunitate` —
+   scriptul il citeste de acolo in pasul urmator. Nu pune alte linkuri in
+   sectiunea `Toate stirile`.
 
-10. **Inregistreaza stirile publicate**:
+11. **Inregistreaza stirile publicate**:
 
     ```
     python .claude/skills/weekly-horeca-digest/scripts/colecteaza.py --mark rapoarte/digest-YYYY-MM-DD.md
@@ -145,5 +167,7 @@ intr-un digest anterior nu mai apare niciodata, nici de pe alta sursa.
   cuvinte proprii, mult mai scurt decat originalul.
 - Daca intr-o saptamana nu exista nicio stire relevanta pe o sursa, e ok sa
   lipseasca din raport — nu inventa continut.
-- Daca o sursa apare `blocat` in tabel, e o problema de retea a mediului cloud
-  (lista de domenii permise), nu a sursei — spune asta in `Starea surselor`.
+- `blocat (proxy de retea)` in tabelul scriptului inseamna ca mediul cloud nu are
+  voie sa iasa spre acel domeniu. Un raspuns HTTP 403 sau 429 de la site inseamna
+  altceva: site-ul refuza cererile venite din datacenter — scrie „site-ul refuza
+  cererile (HTTP xxx)”, nu „blocat de reteaua mediului”.

@@ -42,7 +42,8 @@ KEYWORDS = re.compile(r"\b(" + "|".join([
     r"cofetar", r"pizz", r"burger", r"kebab", r"shaorm", r"mcdonald", r"kfc",
     r"starbucks", r"popeyes", r"spartan", r"franciz", r"ospitalitat", r"alimentar",
     r"bere\b", r"berari", r"vinuri", r"crama", r"ghost kitchen", r"food hall",
-    r"ospatar", r"bacsis",
+    r"ospatar", r"bacsis", r"festival", r"street ?food", r"food ?truck",
+    r"dark kitchen", r"degustar",
 ]) + r")")
 
 try:
