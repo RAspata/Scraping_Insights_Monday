@@ -141,13 +141,12 @@ intr-un digest anterior nu mai apare niciodata, nici de pe alta sursa.
    [rezumat]
    Oportunitate: [local/operator, adresa/zona, data, persoana de contact]
    [link]
-
-   ## Starea surselor
-   | Sursa | Stiri incluse | Stare |
-   [cate un rand pentru fiecare sursa: ok / fara oportunitati saptamana asta /
-   blocat de reteaua mediului / site-ul refuza cererile (HTTP xxx) /
-   acoperita partial prin cautare]
    ```
+   Raportul se opreste dupa ultima stire: fara sectiune despre starea surselor,
+   fara note tehnice (raportul e trimis pe email, iar cititorul nu vrea asa ceva).
+   Starea surselor (ce a mers, ce a fost blocat, ce a refuzat cererile) o scrii
+   doar in mesajul final al sesiunii, nu in raport.
+
    Linkul fiecarei stiri sta pe propriul rand, sub randul `Oportunitate` —
    scriptul il citeste de acolo in pasul urmator. Nu pune alte linkuri in
    sectiunea `Toate stirile`.
@@ -169,5 +168,5 @@ intr-un digest anterior nu mai apare niciodata, nici de pe alta sursa.
   lipseasca din raport — nu inventa continut.
 - `blocat (proxy de retea)` in tabelul scriptului inseamna ca mediul cloud nu are
   voie sa iasa spre acel domeniu. Un raspuns HTTP 403 sau 429 de la site inseamna
-  altceva: site-ul refuza cererile venite din datacenter — scrie „site-ul refuza
-  cererile (HTTP xxx)”, nu „blocat de reteaua mediului”.
+  altceva: site-ul refuza cererile venite din datacenter — in mesajul final scrie
+  „site-ul refuza cererile (HTTP xxx)”, nu „blocat de reteaua mediului”.
