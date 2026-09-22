@@ -37,20 +37,37 @@ intr-un digest anterior nu mai apare niciodata, nici de pe alta sursa.
 
 ## Pasi
 
-1. **Ruleaza colectorul** din radacina repo-ului:
+1. **Porneste de la colectarea facuta de GitHub.** Un workflow GitHub Actions
+   ruleaza luni la 05:00 UTC colectorul in modul complet si salveaza rezultatul in
+   `colectare/colectare.md`. GitHub poate citi si site-urile care refuza cererile
+   din mediul cloud (Wall-Street, Capital, BZI), iar fisierul contine pentru
+   fiecare articol si descrierea lui (randul `>` de sub titlu).
 
-   ```
-   python .claude/skills/weekly-horeca-digest/scripts/colecteaza.py
-   ```
+   Fa `git pull origin main`, apoi citeste primul rand din `colectare/colectare.md`
+   (`# Fereastra: ... -> YYYY-MM-DD HH:MM`).
+   - **Daca data de dupa `->` e azi** (ora Romaniei), foloseste fisierul ca lista
+     de articole si **nu mai rula colectorul**. Sari peste pasul 3 pentru sursele
+     marcate acolo cu `citite paginile HoReCa/food` sau `completat din paginile
+     HoReCa/food` — paginile lor sunt deja incluse.
+   - **Altfel** (fisierul lipseste sau e vechi, de ex. la o rulare manuala in
+     mijlocul saptamanii), ruleaza colectorul tu din radacina repo-ului:
 
-   Scriptul stabileste fereastra de timp (de la data ultimului raport pana acum;
-   7 zile daca nu exista niciun raport), citeste toate feed-urile din
-   `surse-horeca-retail.md` cu paginare si afiseaza:
+     ```
+     python .claude/skills/weekly-horeca-digest/scripts/colecteaza.py
+     ```
+
+   In ambele cazuri primesti fereastra de timp (de la data ultimului raport pana
+   acum; 7 zile daca nu exista niciun raport) si:
    - un tabel cu starea fiecarei surse (ok / blocat / eroare / fara feed) si daca
      feed-ul acopera toata fereastra;
    - articolele din fereastra, cu data exacta, **deja fara** cele publicate in
-     rapoartele anterioare. La feed-urile `(filtrat)` trec doar titlurile cu
-     cuvinte-cheie HoReCa/food, deci lista e o preselectie — tot tu decizi relevanta.
+     rapoartele anterioare. La feed-urile `(filtrat)` si la pagini trec doar
+     titlurile cu cuvinte-cheie HoReCa/food, deci lista e o preselectie — tot tu
+     decizi relevanta.
+
+   Pentru rezumat si randul `Oportunitate`, deschide articolul. Daca site-ul
+   refuza cererea din cloud, foloseste descrierea din `colectare/colectare.md`
+   si scrie doar ce reiese sigur din ea.
 
    **Daca scriptul iese cu codul 3 (toate feed-urile blocate de retea), opreste-te.**
    Nu scrie raport, nu rula `--mark`, nu face commit sau push: un raport gol ar fi
@@ -96,7 +113,7 @@ intr-un digest anterior nu mai apare niciodata, nici de pe alta sursa.
    | Scor | Ce fel de stire |
    |---|---|
    | 9-10 | Restaurant, cafenea, fast-food sau dark kitchen **nou deschis sau cu deschidere anuntata**, cu adresa sau zona cunoscuta, in Bucuresti. Food hall / food court nou in Bucuresti (multi chiriasi). Restaurant sau lant care **paraseste Wolt/Tazz/Bolt Food** sau spune ca nu livreaza inca. |
-   | 7-8 | Acelasi tip de deschidere in alt oras mare unde e Glovo (Cluj, Timisoara, Iasi, Brasov, Constanta, Sibiu, Craiova etc.). Lant care anunta un plan de extindere cu orase sau numar de unitati (ex. „5 restaurante noi in 2026”). Brand strain care intra in Romania. Festival de street food / targ gastronomic cu multi operatori, cu data si loc cunoscute, inca nedesfasurat. |
+   | 7-8 | Acelasi tip de deschidere in alt oras mare unde e Glovo (Cluj, Timisoara, Iasi, Brasov, Constanta, Sibiu, Craiova etc.). Lant care anunta un plan de extindere cu orase sau numar de unitati (ex. „5 restaurante noi in 2026”). Brand strain care intra in Romania. Festival de street food / targ gastronomic cu multi operatori, cu data si loc cunoscute, inca nedesfasurat — **in Bucuresti primeste minim 8** (orice eveniment care urmeaza si aduna multi operatori HoReCa: food festival, coffee festival, food week, targ de producatori). |
    | 5-6 | Deschidere sau eveniment cu detalii incomplete (fara zona sau fara data). Lant existent care isi schimba conceptul sau lanseaza un brand nou. Relocari si redeschideri. Operator local care creste (investitie, locatie a doua). |
    | 3-4 | Mentiune indirecta a unor operatori care ar putea fi prospectati (ex. lista restaurantelor participante la o saptamana gastronomica deja incheiata). |
    | 1-2 | Nu intra in raport. |

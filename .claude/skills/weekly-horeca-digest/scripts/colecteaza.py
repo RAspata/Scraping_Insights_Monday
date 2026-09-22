@@ -20,7 +20,7 @@ import unicodedata
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
-from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parents[4]
 SOURCES = ROOT / "surse-horeca-retail.md"
@@ -37,7 +37,7 @@ MAX_WINDOW_DAYS = 21
 KEYWORDS = re.compile(r"\b(" + "|".join([
     r"horeca", r"restaurant", r"cafenea", r"cafenel", r"cafea", r"coffee", r"bistro",
     r"bar\b", r"baruri", r"terasa", r"terase", r"fast[- ]?food", r"food", r"mancare",
-    r"gastronom", r"culinar", r"bucatar", r"chef\b", r"meniu", r"livrar", r"delivery",
+    r"gastronom", r"culinar", r"bucatar", r"chef\b", r"meniu", r"livrar", r"livrator", r"delivery",
     r"glovo", r"wolt", r"tazz", r"bolt food", r"catering", r"patiser", r"brutar",
     r"cofetar", r"pizz", r"burger", r"kebab", r"shaorm", r"mcdonald", r"kfc",
     r"starbucks", r"popeyes", r"spartan", r"franciz", r"ospitalitat", r"alimentar",
@@ -61,7 +61,7 @@ def fold(s):
 def normalize_url(u):
     p = urlsplit(u.strip())
     q = [(k, v) for k, v in parse_qsl(p.query) if not k.lower().startswith(("utm_", "fbclid", "gclid"))]
-    path = p.path.rstrip("/") or "/"
+    path = re.sub(r"\.html?$", "", p.path.rstrip("/")) or "/"
     return urlunsplit((p.scheme.lower(), p.netloc.lower().removeprefix("www."), path, urlencode(q), ""))
 
 
@@ -130,8 +130,76 @@ def parse_items(xml):
         if dt is not None and dt.tzinfo is None:
             dt = dt.replace(tzinfo=timezone.utc)
         cats = [html.unescape(c) for c in re.findall(r"<category[^>]*>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?</category>", block, re.S)]
-        items.append({"title": text_of(block, "title"), "link": link, "date": dt, "cats": cats})
+        desc = re.sub(r"\s+", " ", text_of(block, "description"))[:400]
+        items.append({"title": text_of(block, "title"), "link": link, "date": dt, "cats": cats, "desc": desc})
     return items
+
+
+def meta(page, *names):
+    for n in names:
+        m = re.search(rf'<meta[^>]+(?:property|name|itemprop)=["\']{re.escape(n)}["\'][^>]*content=["\']([^"\']+)', page, re.I) \
+            or re.search(rf'<meta[^>]+content=["\']([^"\']+)["\'][^>]*(?:property|name|itemprop)=["\']{re.escape(n)}["\']', page, re.I)
+        if m:
+            return html.unescape(m.group(1)).strip()
+    return ""
+
+
+def parse_date(s):
+    if not s:
+        return None
+    try:
+        dt = datetime.fromisoformat(s.strip().replace("Z", "+00:00"))
+    except ValueError:
+        try:
+            dt = parsedate_to_datetime(s)
+        except Exception:
+            return None
+    return dt if dt.tzinfo else dt.replace(tzinfo=TZ)
+
+
+def article_links(listing_url, page):
+    """Linkurile de articole de pe o pagina de sectiune/tag (acelasi domeniu, slug lung)."""
+    host = urlsplit(listing_url).netloc.lower().removeprefix("www.")
+    links, seen = [], set()
+    for href, inner in re.findall(r'<a\b[^>]*href=["\']([^"\'#]+)["\'][^>]*>(.*?)</a>', page, re.S | re.I):
+        url = urljoin(listing_url, html.unescape(href))
+        p = urlsplit(url)
+        if p.netloc.lower().removeprefix("www.") != host:
+            continue
+        slug = p.path.rstrip("/").rsplit("/", 1)[-1]
+        if slug.count("-") < 3 or re.search(r"/(tag|eticheta|categorie|category|autor|author|page)/", p.path):
+            continue
+        key = normalize_url(url)
+        if key in seen or key == normalize_url(listing_url):
+            continue
+        seen.add(key)
+        title = html.unescape(re.sub(r"<[^>]+>", " ", inner))
+        links.append((url, re.sub(r"\s+", " ", title).strip()))
+    return links
+
+
+def collect_page(listing_url, since, ledger, max_articles=40):
+    """Returneaza (status, items) pentru articolele din fereastra de pe o pagina HoReCa/food."""
+    status, page = fetch(listing_url)
+    if status != "ok":
+        return status, []
+    items = []
+    for url, title in article_links(listing_url, page)[:max_articles]:
+        if normalize_url(url) in ledger:
+            continue
+        st, art = fetch(url)
+        if st != "ok":
+            continue
+        dt = parse_date(meta(art, "article:published_time", "datePublished", "og:updated_time")
+                        or (re.search(r'"datePublished"\s*:\s*"([^"]+)"', art) or [None, ""])[1])
+        if not dt or dt < since:
+            continue
+        items.append({
+            "title": meta(art, "og:title") or title,
+            "link": url, "date": dt, "cats": [],
+            "desc": re.sub(r"\s+", " ", meta(art, "og:description", "description"))[:400],
+        })
+    return "ok", items
 
 
 def page_url(feed, n):
@@ -195,11 +263,32 @@ def cmd_collect(args):
 
     status_rows, sections = [], []
     for src in parse_sources():
-        if not src["feeds"]:
-            status_rows.append((src["name"], "fara feed", 0, 0, "verifica paginile/homepage"))
-            continue
         kept, dropped, statuses, covered_all = [], 0, [], True
         seen = set()
+        page_note = ""
+        if args.pagini and src["pages"]:
+            page_st = []
+            for page in src["pages"]:
+                st, items = collect_page(page, since, ledger)
+                page_st.append(st)
+                for it in items:
+                    key = normalize_url(it["link"])
+                    # paginile au si linkuri din meniuri/bare laterale -> filtram pe subiect
+                    if not KEYWORDS.search(fold(it["title"] + " " + it["desc"])):
+                        continue
+                    if key not in seen:
+                        seen.add(key)
+                        kept.append(it)
+            page_note = "; pagini: " + ("ok" if all(s == "ok" for s in page_st) else ", ".join(page_st))
+        if not src["feeds"]:
+            if args.pagini and src["pages"]:
+                status_rows.append((src["name"], "fara feed", len(kept), 0, "citite paginile HoReCa/food" + page_note))
+                if kept:
+                    kept.sort(key=lambda i: i["date"], reverse=True)
+                    sections.append((src, kept))
+            else:
+                status_rows.append((src["name"], "fara feed", 0, 0, "verifica paginile/homepage"))
+            continue
         for feed, filtered in src["feeds"]:
             status, items, covered = collect_feed(feed, since)
             statuses.append(status)
@@ -221,8 +310,13 @@ def cmd_collect(args):
                     continue
                 kept.append(it)
         st = "ok" if all(s == "ok" for s in statuses) else "; ".join(statuses)
-        note = "feed complet pe fereastra" if covered_all and st == "ok" else "feed INCOMPLET -> verifica si paginile HoReCa/food"
-        status_rows.append((src["name"], st, len(kept), dropped, note))
+        if covered_all and st == "ok":
+            note = "feed complet pe fereastra"
+        elif page_note:
+            note = "feed incomplet, completat din paginile HoReCa/food"
+        else:
+            note = "feed INCOMPLET -> verifica si paginile HoReCa/food"
+        status_rows.append((src["name"], st, len(kept), dropped, note + page_note))
         if kept:
             kept.sort(key=lambda i: i["date"], reverse=True)
             sections.append((src, kept))
@@ -237,7 +331,7 @@ def cmd_collect(args):
         print("\n!! TOATE feed-urile sunt blocate de reteaua mediului. NU scrie si NU publica"
               " niciun raport; opreste-te si raporteaza problema (vezi SKILL.md, pasul 1).")
         sys.exit(3)
-    print("\n## Articole din feed-uri (in fereastra, nepublicate inca)\n")
+    print("\n## Articole (in fereastra, nepublicate inca)\n")
     for src, items in sections:
         print(f"### {src['name']}")
         if src["pages"]:
@@ -245,6 +339,8 @@ def cmd_collect(args):
         for it in items:
             cats = f" [{', '.join(it['cats'][:4])}]" if it["cats"] else ""
             print(f"- {it['date'].astimezone(TZ):%Y-%m-%d %H:%M} | {it['title']}{cats} | {it['link']}")
+            if args.pagini and it.get("desc"):
+                print(f"  > {it['desc']}")
         print()
 
 
@@ -280,6 +376,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--since", help="YYYY-MM-DD, inceputul ferestrei (implicit: data ultimului raport)")
     ap.add_argument("--mark", metavar="RAPORT", help="adauga linkurile din raport in registrul de linkuri publicate")
+    ap.add_argument("--pagini", action="store_true",
+                    help="citeste si paginile HoReCa/food (data + descriere din fiecare articol); "
+                         "folosit de GitHub Actions pentru colectare/colectare.md")
     args = ap.parse_args()
     if args.mark:
         cmd_mark(args.mark)
