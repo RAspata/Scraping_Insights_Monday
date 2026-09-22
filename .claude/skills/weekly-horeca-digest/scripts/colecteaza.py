@@ -244,7 +244,7 @@ def cmd_collect(args):
 
 def cmd_mark(report):
     text = Path(report).read_text(encoding="utf-8")
-    m = re.search(r"^## Toate stirile.*?$(.*?)(?=^## |\Z)", text, re.S | re.M)
+    m = re.search(r"^## Toate [sșş]tirile.*?$(.*?)(?=^## |\Z)", text, re.S | re.M)
     if not m:
         sys.exit("Nu gasesc sectiunea '## Toate stirile' in raport.")
     day = re.search(r"(\d{4}-\d{2}-\d{2})", Path(report).name)
