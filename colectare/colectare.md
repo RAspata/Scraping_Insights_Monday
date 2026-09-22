@@ -1,4 +1,4 @@
-# Fereastra: 2026-09-15 00:00 -> 2026-09-22 22:37 (Europe/Bucharest)
+# Fereastra: 2026-09-15 00:00 -> 2026-09-22 22:46 (Europe/Bucharest)
 # Linkuri deja publicate in rapoarte anterioare: 5
 
 ## Stare surse
@@ -11,12 +11,12 @@
 | ȘtirileProTV — HoReCa | ok | 1 | 0 | feed INCOMPLET -> verifica si paginile HoReCa/food |
 | Ziarul Financiar | ok | 11 | 0 | feed incomplet, completat din paginile HoReCa/food; pagini: ok |
 | Profit.ro | ok | 0 | 0 | feed INCOMPLET -> verifica si paginile HoReCa/food |
-| Wall-Street.ro | fara feed | 0 | 0 | citite paginile HoReCa/food; pagini: eroare HTTP 403, eroare HTTP 403 |
+| Wall-Street.ro | ok | 1 | 0 | feed incomplet, completat din paginile HoReCa/food; pagini: eroare HTTP 403, eroare HTTP 403 |
 | Economica.net | ok | 6 | 0 | feed INCOMPLET -> verifica si paginile HoReCa/food |
 | Capital.ro | fara feed | 1 | 0 | citite paginile HoReCa/food; pagini: ok |
 | StartupCafe.ro | ok | 8 | 0 | feed complet pe fereastra |
 | Actual de Cluj | ok | 10 | 0 | feed complet pe fereastra |
-| BZI.ro | eroare HTTP 429 | 0 | 0 | feed INCOMPLET -> verifica si paginile HoReCa/food |
+| BZI.ro | eroare HTTP 429; ok | 4 | 0 | feed INCOMPLET -> verifica si paginile HoReCa/food |
 | Turnul Sfatului | ok | 14 | 2 | feed complet pe fereastra; pagini: ok |
 | Ziua de Constanța | fara feed | 0 | 0 | verifica paginile/homepage |
 | Sibiu100 | ok | 6 | 0 | feed complet pe fereastra |
@@ -102,6 +102,11 @@ Pagini HoReCa/food: https://www.zf.ro/companii/retail-agrobusiness/
 - 2026-09-17 00:05 | Câte restaurante, cafenele şi baruri sunt în Bucureşti şi în următoarele cele mai mari cinci oraşe din România? Primele estimări: peste 11.000 | https://www.zf.ro/companii/retail-agrobusiness/cate-restaurante-cafenele-si-baruri-sunt-in-bucuresti-si-in-urmatoarele-cele-mai-mari-cinci-orase-din-romania-primele-estimari-peste-11-000-23239148
   > În Bucureşti şi localităţile din jur, pe o rază de până la 25 de kilometri, precum şi în următoarele cele mai mari cinci oraşe din România, adică în Cluj-Napoca, Timişoara, Iaşi, Braşov şi Constanţa, sunt astăzi circa 11.000 de restaurante, cafenele şi baruri, arată primele estimări. Numărul exact urmează a fi stabilit după ce compania Hospitality Culture Institute, care studiază piaţa HoReCa, va 
 
+### Wall-Street.ro
+Pagini HoReCa/food: https://www.wall-street.ro/articol/horeca/index.html, https://www.wall-street.ro/tag/restaurante.html
+- 2026-09-21 13:39 | Burgerii Wendy’s nu mai stârnesc aceeași poftă de afaceri: insolvența s-a așezat la masa unui mare francizat - Wall-Street.ro | https://news.google.com/rss/articles/CBMilgFBVV95cUxPbDltQjdfRkppdkFxVk91RTRteS1Ydy1QazBxc0lUOGc0dGZ5NGplbGJCQ2pld1J6QzkzQncwTm5aWmV2RjN5RWJfdWpwSmwwWUY2dE5yV09PZUZPeW4wTjhwT1pfNUdXX2I5UElEamlCa29DazRTbUtSWUhKS1Q1NENuSGpKZklBaTJHdkVnRUpBNGYzd0E?oc=5
+  > <a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxPbDltQjdfRkppdkFxVk91RTRteS1Ydy1QazBxc0lUOGc0dGZ5NGplbGJCQ2pld1J6QzkzQncwTm5aWmV2RjN5RWJfdWpwSmwwWUY2dE5yV09PZUZPeW4wTjhwT1pfNUdXX2I5UElEamlCa29DazRTbUtSWUhKS1Q1NENuSGpKZklBaTJHdkVnRUpBNGYzd0E?oc=5" target="_blank">Burgerii Wendy’s nu mai stârnesc aceeași poftă de afaceri: insolvența s-a așezat la masa unui mare francizat</a>&nbsp;&nbsp;
+
 ### Economica.net
 - 2026-09-22 14:17 | O alertă alimentară nu se verifică pe Facebook. Cum afli dacă produsul pe care l-ai cumpărat este cel vizat [Advertoriale, alertă, alerta alimentara, alerta alimente] | https://www.economica.net/o-alerta-alimentara-nu-se-verifica-pe-facebook-cum-afli-daca-produsul-pe-care-l-ai-cumparat-este-cel-vizat_978772.html
   > Un titlu distribuit de sute de ori pe rețelele sociale poate spune că într-un anumit aliment a fost identificată Salmonella, Listeria sau o altă neconformitate. Pentru consumator însă, informația esențială este alta: produsul pe care îl am eu acasă este sau nu cel vizat?
@@ -160,6 +165,16 @@ Pagini HoReCa/food: https://www.capital.ro/tag/horeca
   > Mai multe străzi din municipiul Turda vor rămâne fără gaze naturale joi, 17 septembrie, timp de șapte ore, pentru lucrări de cuplare a unor conducte...
 - 2026-09-15 09:36 | Livrările de locuinţe noi în 2025 au stagnat în Bucureşti, în timp ce au scăzut cu 42% în Cluj-Napoca şi cu 29% în Braşov [Economie, Cluj, Cluj-Napoca, news Cluj] | https://actualdecluj.ro/livrarile-de-locuinte-noi-in-2025-au-stagnat-in-bucuresti-in-timp-ce-au-scazut-cu-42-in-cluj-napoca-si-cu-29-in-brasov/
   > Numărul de locuinţe noi finalizate în 2025 a stagnat în Bucureşti comparativ cu 2024 şi a scăzut cu 42% în Cluj-Napoca şi cu 29% în...
+
+### BZI.ro
+- 2026-09-21 15:07 | A început priveghiul lui Viorel Oarză, la Iași. Sicriul cu trupul neînsuflețit a fost depus la restaurantul Lord Events, în aplauze - BZI.ro | https://news.google.com/rss/articles/CBMi6wFBVV95cUxPYmpMMlh3Rlc4aS02MlB3Ym52MGdjeDZSM0pEQU5Gd2hJMXlfRGw5Y0k1aU80V3NnOXdxSndEMm52ek90T2hOZ0docWtCaXFLSzhQTGFqTHJHTHA4NVZiT3NBUk5vT1lzTk5nWG9COGY3a3pjcnBuOG14eWk1UUMxNnR5T1FPczR5U1ZBYzBMeUtEWjJkTVNlb1JMNnZjNEVQTGlEMFlxTzVDY09fMDdtcVBCRm9vT0VwZWRHV0dxNFIwNkFpbkoxWm9hUWh1Um1vTW9uaGxKcTMzNmFjeVRkY0NVVmFSamktcjBF?oc=5
+  > <a href="https://news.google.com/rss/articles/CBMi6wFBVV95cUxPYmpMMlh3Rlc4aS02MlB3Ym52MGdjeDZSM0pEQU5Gd2hJMXlfRGw5Y0k1aU80V3NnOXdxSndEMm52ek90T2hOZ0docWtCaXFLSzhQTGFqTHJHTHA4NVZiT3NBUk5vT1lzTk5nWG9COGY3a3pjcnBuOG14eWk1UUMxNnR5T1FPczR5U1ZBYzBMeUtEWjJkTVNlb1JMNnZjNEVQTGlEMFlxTzVDY09fMDdtcVBCRm9vT0VwZWRHV0dxNFIwNkFpbkoxWm9hUWh1Um1vTW9uaGxKcTMzNmFjeVRkY0NVVmFSamktcjBF?oc=5" target="_blank">A început p
+- 2026-09-20 13:01 | Șofer din Suceava, parcare pe interzis la KFC în Iași. A blocat ieșirea de la drive-thru • Buna Ziua Iasi - BZI.ro | https://news.google.com/rss/articles/CBMiswFBVV95cUxQZkFzcm40UUFVQ0hoWGtWaGMxOTVnQ3EyUTcxQ3BWS25UOWU3c1Jxd0tjdkpMemM2TUx2THVNUlB5NkVIWmk4SVhnV2NLcHBDVV9Ncy1HbnQ1S1RXYVNlMER5Wm9SeTdlcEJrVi0wc29ORTlMNE1DV05FSngzQk5GR0dlVXZINVZoMTlDRVVyaWNMOHJ3dlhtc1R6UUliWF91LUZHNm9kaTVEYnpudFpPWE9icw?oc=5
+  > <a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxQZkFzcm40UUFVQ0hoWGtWaGMxOTVnQ3EyUTcxQ3BWS25UOWU3c1Jxd0tjdkpMemM2TUx2THVNUlB5NkVIWmk4SVhnV2NLcHBDVV9Ncy1HbnQ1S1RXYVNlMER5Wm9SeTdlcEJrVi0wc29ORTlMNE1DV05FSngzQk5GR0dlVXZINVZoMTlDRVVyaWNMOHJ3dlhtc1R6UUliWF91LUZHNm9kaTVEYnpudFpPWE9icw?oc=5" target="_blank">Șofer din Suceava, parcare pe interzis la KFC în Iași. A blocat ieșirea de la drive-t
+- 2026-09-18 02:04 | Droguri vândute la restaurantul Kiwan'S! Bărbatul a vândut canabis unui investigator sub acoperire - BZI.ro | https://news.google.com/rss/articles/CBMiwAFBVV95cUxPT1ViMW5NVS1RdEVBWUFqR19UUk41MEdaNlFWd2xZdUxHRHViSGxfNmNqRjM1eTItWnhxXzRrVTBPcGVHQ29iRXFCRDA0V1QxRzljaVl5dXVjOFdjNFJqVHdBNGZCQUZpSExzemtxMnptU3VqTVBzdmY5SDNHUjhNb2p2TDlXNE9kb1ZvNmZOeVFqQTE4SS1BZkdTbkhta1RCNTh4M0VGcUFnOURpaFMzbzFlbjRnbFF4RHdPajE5MWc?oc=5
+  > <a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxPT1ViMW5NVS1RdEVBWUFqR19UUk41MEdaNlFWd2xZdUxHRHViSGxfNmNqRjM1eTItWnhxXzRrVTBPcGVHQ29iRXFCRDA0V1QxRzljaVl5dXVjOFdjNFJqVHdBNGZCQUZpSExzemtxMnptU3VqTVBzdmY5SDNHUjhNb2p2TDlXNE9kb1ZvNmZOeVFqQTE4SS1BZkdTbkhta1RCNTh4M0VGcUFnOURpaFMzbzFlbjRnbFF4RHdPajE5MWc?oc=5" target="_blank">Droguri vândute la restaurantul Kiwan'S! Bărbatul a vândut canabis u
+- 2026-09-16 02:05 | IMAGINI ȘOCANTE! Carne de pui cu pene servită elevilor din Iași. „Și eu, dacă mănânc la KFC și găsesc o pană, nu sun la ziar” - BZI.ro | https://news.google.com/rss/articles/CBMi4wFBVV95cUxNMGQweWxrX3JoS0gzbXVkNzRfX213cEZKaXNhVE56WUJ5dTY3UlJ1MGR5QXg1b1lPNGszSlFFV3JSbWNKYk5BTjRnTWhmMEdLeVJfdDdPa3VMRVVJTW84VlhoRlEyR3FPUEkyTHNjOW5CR1lobXZwWTBDcjh2NlIwSmttdDRGeWoxOUhJN2hfdjNfaTJtRElTck5KWFBLOVMxbkhUeW5ydDdPN21CRFNjelUtdXZYNWh0SEpJSUpraXgycGJpWFJBQll5WEN6RHN4V0RBOGRJN1J5U3ZnLURWTUljVQ?oc=5
+  > <a href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxNMGQweWxrX3JoS0gzbXVkNzRfX213cEZKaXNhVE56WUJ5dTY3UlJ1MGR5QXg1b1lPNGszSlFFV3JSbWNKYk5BTjRnTWhmMEdLeVJfdDdPa3VMRVVJTW84VlhoRlEyR3FPUEkyTHNjOW5CR1lobXZwWTBDcjh2NlIwSmttdDRGeWoxOUhJN2hfdjNfaTJtRElTck5KWFBLOVMxbkhUeW5ydDdPN21CRFNjelUtdXZYNWh0SEpJSUpraXgycGJpWFJBQll5WEN6RHN4V0RBOGRJN1J5U3ZnLURWTUljVQ?oc=5" target="_blank">IMAGINI ȘOCANTE! Carn
 
 ### Turnul Sfatului
 Pagini HoReCa/food: https://www.turnulsfatului.ro/timp-liber/cronica-de-restaurant/
