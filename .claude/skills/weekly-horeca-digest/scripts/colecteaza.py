@@ -16,6 +16,7 @@ import html
 import re
 import subprocess
 import sys
+import time
 import unicodedata
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
@@ -85,13 +86,27 @@ def parse_sources():
     return sources
 
 
-def fetch(url):
+HEADERS = [
+    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,application/rss+xml,*/*;q=0.8",
+    "Accept-Language: ro-RO,ro;q=0.9,en-US;q=0.8,en;q=0.7",
+    "Cache-Control: no-cache",
+    "Upgrade-Insecure-Requests: 1",
+]
+_last_hit = {}  # host -> momentul ultimei cereri, ca sa nu bombardam acelasi site
+
+
+def fetch(url, retries=2):
     """Returneaza (status, body). status: 'ok', 'blocat', 'eroare HTTP xxx', 'eroare'."""
+    host = urlsplit(url).netloc
+    wait = 1.0 - (time.monotonic() - _last_hit.get(host, 0))
+    if wait > 0:
+        time.sleep(wait)
+    _last_hit[host] = time.monotonic()
+    cmd = ["curl", "-sL", "--compressed", "-A", UA, "--max-time", "30", "-w", "\n__HTTP__%{http_code}"]
+    for h in HEADERS:
+        cmd += ["-H", h]
     try:
-        r = subprocess.run(
-            ["curl", "-sL", "--compressed", "-A", UA, "--max-time", "30", "-w", "\n__HTTP__%{http_code}", url],
-            capture_output=True, timeout=60,
-        )
+        r = subprocess.run(cmd + [url], capture_output=True, timeout=60)
     except Exception as e:
         return f"eroare ({e.__class__.__name__})", ""
     out = r.stdout.decode("utf-8", errors="replace")
@@ -101,6 +116,9 @@ def fetch(url):
         return "blocat (proxy de retea)", ""
     if r.returncode != 0:
         return f"eroare curl {r.returncode}", ""
+    if code in ("429", "503") and retries > 0:  # prea multe cereri -> asteptam si reincercam
+        time.sleep(15 * (3 - retries))
+        return fetch(url, retries - 1)
     if code != "200":
         return f"eroare HTTP {code}", ""
     return "ok", body
