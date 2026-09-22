@@ -132,7 +132,7 @@ intr-un digest anterior nu mai apare niciodata, nici de pe alta sursa.
    stiri, e in regula: mai bine 5 oportunitati reale decat 20 de stiri generale.
 
 8. **Pentru fiecare stire retinuta**, scrie:
-   - Titlu (in romana; daca sursa e deja in romana pastreaza-l)
+   - Titlu (in romana, fara diacritice; daca sursa e deja in romana pastreaza-l)
    - Sursa si data publicarii
    - Un rezumat de 1-2 propozitii, in cuvinte proprii (nu copia paragrafe). Pentru
      rezumat citeste articolul (feed-ul are de obicei si un fragment in
@@ -183,6 +183,8 @@ intr-un digest anterior nu mai apare niciodata, nici de pe alta sursa.
 
 ## Note
 
+- Scrie tot raportul **fara diacritice** (a, i, s, t in loc de ă, â, î, ș, ț),
+  inclusiv titlurile preluate din articole si numele proprii.
 - Nu reproduce paragrafe intregi din articole — rezumatul trebuie sa fie in
   cuvinte proprii, mult mai scurt decat originalul.
 - Daca intr-o saptamana nu exista nicio stire relevanta pe o sursa, e ok sa

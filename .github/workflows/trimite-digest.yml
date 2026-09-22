@@ -52,6 +52,6 @@ jobs:
           # destinatarii primesc in BCC, ca sa nu-si vada adresele intre ei
           to: ${{ secrets.MAIL_USERNAME }}
           bcc: ${{ secrets.MAIL_TO }}
-          subject: Oportunități HoReCa — ${{ steps.raport.outputs.date }}
+          subject: Oportunitati HoReCa — ${{ steps.raport.outputs.date }}
           html_body: file://${{ steps.raport.outputs.file }}
           convert_markdown: true
